@@ -69,6 +69,7 @@ class Park(db.Model):
     location = db.Column(db.String)
     activities = db.Column(db.String)
     campgrounds = db.Column(db.String)
+    videos = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     visits = db.relationship('Visit', backref='park', cascade='all')
 
