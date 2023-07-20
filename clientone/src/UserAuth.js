@@ -7,7 +7,7 @@ function SignupComponent(){
     function handleSignup(){
         const data = { username, password}
 
-        fetch('signup', {
+        fetch('/signup', {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ function LoginComponent(){
     function handleLogin(){
         const data = { username, password}
 
-        fetch('login', {
+        fetch('/login', {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
