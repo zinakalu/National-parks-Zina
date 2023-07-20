@@ -4,7 +4,7 @@ from sqlalchemy import MetaData
 from sqlalchemy.orm import validates
 from datetime import datetime
 from sqlalchemy.ext.hybrid import hybrid_property
-from app import db
+from database import db
 
 
 convention = {
@@ -17,7 +17,7 @@ convention = {
 
 metadata = MetaData(naming_convention=convention)
 
-db = SQLAlchemy(metadata=metadata)
+# db = SQLAlchemy(metadata=metadata)
 
 class User(db.Model):
     __tablename__ = "users"

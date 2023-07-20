@@ -2,6 +2,7 @@ from flask import Flask, jsonify, make_response, request, session
 from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from database import db
 # import os
 
 # BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -13,16 +14,19 @@ from flask_sqlalchemy import SQLAlchemy
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # app.json.compact = False
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'  
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///national-parks.db'  
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy() 
+# db = SQLAlchemy(app)
+db.init_app(app)
+
 migrate = Migrate(app, db)
 
-# db.init_app(app)
+
 
 bcrypt = Bcrypt(app)
 
+# TBD
 from models import User, Visit, Park
 
 

@@ -1,9 +1,16 @@
-from models import db, User, Park
+from flask import Flask
+from database import db
+from models import User, Park
 from faker import Faker
-from config import app
 from sqlalchemy.sql import func
+from flask_sqlalchemy import SQLAlchemy
 
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///national-parks.db'  
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# db = SQLAlchemy(app)
+db.init_app(app)
 
 fake = Faker()
 
@@ -249,22 +256,30 @@ parks = [
     
 ]
 
+def clear_previous_seeds():
+    with app.app_context():
+        db.drop_all()
+        db.create_all()
 
-with app.app_context():
-    for _ in range(60):
-        user = User(username=fake.user_name(), _password_hash=fake.password(), image_url=fake.url())
-        db.session.add(user)
-    db.session.commit()
-
-    for park_info in parks:
-        park = Park(name=park_info.get('name'),
-                    location=park_info.get('location'),
-                    activities=park_info.get('activities'),
-                    campgrounds=park_info.get('campgrounds'),
-                    user_id = User.query.order_by(func.random()).first().id)
-
-        db.session.add(park)
-    db.session.commit()
-
-
+def seed_data():
+    clear_previous_seeds()
     
+    with app.app_context():
+        for _ in range(60):
+            user = User(username=fake.user_name(), _password_hash=fake.password(), image_url=fake.url())
+            db.session.add(user)
+        db.session.commit()
+
+        for park_info in parks:
+            park = Park(name=park_info.get('name'),
+                        location=park_info.get('location'),
+                        activities=park_info.get('activities'),
+                        campgrounds=park_info.get('campground'),
+                        videos=park_info.get('video'),
+                        user_id = User.query.order_by(func.random()).first().id)
+
+            db.session.add(park)
+        db.session.commit()
+
+if __name__ == '__main__':
+    seed_data()
