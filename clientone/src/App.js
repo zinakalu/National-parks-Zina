@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
 import './App.css';
 import 'leaflet/dist/leaflet.css';
 import { useNavigate } from 'react-router-dom';
+import { statesData } from './data'
 
 function App() {
   const center = [40.63463151377654, -97.89969605983609];
   const navigate = useNavigate();
 
-  const [statesData, setStatesData] = useState([])
+  // const [statesData, setStatesData] = useState([])
 
   useEffect(()=>{
     fetch(`http://localhost:3001/{}`)
@@ -22,8 +23,8 @@ function App() {
         url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=NXYqFx4vIix4Ixh8KlN6"
         attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
       />
-      {statesData.features.map((state, index) => {
-        const coordinates = state.geometry.coordinates[0].map((item) => [item[1], item[0]]);
+      {statesData.features.map((state) => {
+        const coordinates = state.geometry.coordinates[0];
         const stateName = state.properties.name;
 
         return (
