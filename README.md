@@ -10,7 +10,7 @@ In this repo:
 To download the dependencies for the frontend and backend, run:
 pipenv install
 pipenv shell
-npm install --prefix client/client-side
+npm install --prefix clientone
 
 
 You can run your Flask API on localhost:5555 by running:
