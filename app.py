@@ -3,6 +3,7 @@ from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from database import db
+from flask_cors import CORS
 # import os
 
 # BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -14,6 +15,7 @@ from database import db
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # app.json.compact = False
 app = Flask(__name__)
+CORS(app, origins=['*'])
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///national-parks.db'  
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -23,23 +25,22 @@ db.init_app(app)
 migrate = Migrate(app, db)
 
 
-
 bcrypt = Bcrypt(app)
 
 # TBD
 from models import User, Visit, Park
 
 
-excluded_endpoints = ['signup', 'check_session', 'login', 'logout']
+# excluded_endpoints = ['signup', 'check_session', 'login', 'logout']
 
-@app.before_request
-def check_is_logged_in():
-    if request.endpoint not in excluded_endpoints:
-        user_id = session.get('user.id')
-        user = User.query.filter(User.id == user_id).first()
+# @app.before_request
+# def check_is_logged_in():
+#     if request.endpoint not in excluded_endpoints:
+#         user_id = session.get('user.id')
+#         user = User.query.filter(User.id == user_id).first()
 
-        if not user:
-            return {'error': 'User is not logged in'}, 401
+#         if not user:
+#             return {'error': 'User is not logged in'}, 401
 
 
 
@@ -52,6 +53,7 @@ def index():
 def get_all_activities():
     activities = Park.query.all()
     data = [activity.to_dict() for activity in activities]
+    print(data)
     return make_response(
         jsonify(data), 200)
 

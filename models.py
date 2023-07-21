@@ -79,7 +79,7 @@ class Park(db.Model):
             'id': self.id,
             'name': self.name, 
             'location': self.location,
-            'activities': self.activites,
+            'activities': self.activities,
             'campgrounds': self.campgrounds,
             'videos': self.videos
         }

@@ -3,9 +3,9 @@ import React, { useEffect, useState} from 'react'
 function ActivitiesComponent() {
     const [activities, setActivities] = useState([])
 
-    useEffect(()=>{
-        fetchActivities();
-    }, [])
+    // useEffect(()=>{
+    //     fetchActivities();
+    // }, [])
 
     function fetchActivities(){
         fetch('/activities')
@@ -26,11 +26,11 @@ function ActivitiesComponent() {
     function CampgroundsComponent(){
         const [campgrounds, setCampgrounds] = useState([])
 
-        useEffect(() => {
-            fetch('/campgrounds')
-              .then((res) => res.json())
-              .then((data) => setCampgrounds(data));
-          }, []);
+        // useEffect(() => {
+        //     fetch('/campgrounds')
+        //       .then((res) => res.json())
+        //       .then((data) => setCampgrounds(data));
+        //   }, []);
     
     
         return(
@@ -48,11 +48,11 @@ function ActivitiesComponent() {
     function VideosComponent() {
         const [videos, setVideos] = useState([]);
       
-        useEffect(() => {
-          fetch('/videos')
-            .then((res) => res.json())
-            .then((data) => setVideos(data));
-        }, []);
+        // useEffect(() => {
+        //   fetch('/videos')
+        //     .then((res) => res.json())
+        //     .then((data) => setVideos(data));
+        // }, []);
       
         return (
           <div>

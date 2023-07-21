@@ -17,7 +17,7 @@ You can run your Flask API on localhost:5555 by running:
 python phase-4-project/app.py
 
 You can run your React app on localhost:3001 by running:
-npm start --prefix client/client-side
+npm start --prefix clientone
 
 Models (User, Visit, Park)
 In a visit, a user/visitor will go to one national park. Over time, users/visitors will visit many national parks and many national parks will be ivsited by many users/visitors

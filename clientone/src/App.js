@@ -11,11 +11,11 @@ function App() {
 
   // const [statesData, setStatesData] = useState([])
 
-  useEffect(()=>{
-    fetch(`http://localhost:3001/{}`)
-    .then(res => res.json())
-    .then(data => setStatesData(data))
-  }, [])
+  // useEffect(()=>{
+  //   fetch(`http://localhost:3001/{}`)
+  //   .then(res => res.json())
+  //   .then(data => setStatesData(data))
+  // }, [])
 
   return (
     <MapContainer center={center} zoom={10} style={{ width: '100vw', height: '100vh' }}>
